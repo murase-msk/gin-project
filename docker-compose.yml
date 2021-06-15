@@ -1,0 +1,61 @@
+version: '3'
+
+networks:
+    backend:
+      driver: bridge
+
+services:
+    go:
+        container_name: go
+        build:
+            context: .
+            dockerfile: ./docker/Dockerfile_go_dev
+        ports:
+            - 8080:8080
+            - 2345:2345
+        links:
+            - mysql
+        tty: true
+        volumes:
+            - .:/go/src/gin-project
+        depends_on:
+            - mysql
+        security_opt:
+            - seccomp:unconfined
+        cap_add:
+            - SYS_PTRACE
+        networks:
+            - backend
+
+    mysql:
+        container_name: mysql
+        build:
+            context: .
+            dockerfile: ./docker/Dockerfile_mysql_dev
+        environment:
+            MYSQL_USER: root
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_DATABASE: demo
+        hostname: mysql
+        ports:
+            - "3306:3306"
+        volumes:
+            - ./docker/mysql/data:/var/lib/mysql
+        security_opt:
+            - seccomp:unconfined
+        networks:
+            - backend
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        environment:
+            - PMA_ARBITRARY=1
+            - PMA_HOST=mysql
+            - PMA_USER=root
+            - PMA_PASSWORD=password
+        ports:
+            - "8081:80"
+        depends_on:
+            - mysql
+        networks:
+            - backend
