@@ -1,3 +1,11 @@
 {{template "header"}}
 <h2>Hello {{.message}}!</h2>
+<form action="/file-upload" enctype="multipart/form-data" method="post">
+  JPEG,PNG
+  <input type="file" name="image-input" accept="image/jpeg, image/png">
+  PDF
+  <input type="file" name="pdf-input" accept="application/pdf">
+  <br>
+  <input type="submit" value="送信する">
+</form>
 {{template "footer"}}

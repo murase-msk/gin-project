@@ -16,7 +16,7 @@ func main() {
 	//ルーティング
 	r.GET("/", controller.IndexIndexAction)
 	r.GET("/hello", controller.HelloIndexAction)
-
+	r.POST("file-upload", controller.FileAnalysisAction)
 	//r.NoRoute(routes.NoRoute) // どのルーティングにも当てはまらなかった場合に処理
 
 	r.Run(":8080") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
