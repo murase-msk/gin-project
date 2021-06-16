@@ -10,6 +10,8 @@ services:
         build:
             context: .
             dockerfile: ./docker/Dockerfile_go_dev
+        env_file:
+          - .env_dev
         ports:
             - 8080:8080
             - 2345:2345
