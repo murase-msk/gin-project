@@ -47,7 +47,7 @@ docker-compose stop
 
 - debugが動かないとき
   - 最初にvscodeでブレークポイントを作ってデバックを実行する必要がある？理由不明
-  PCを再起動or高速スタートアップをしないor WSL再起動？
+  PCを再起動or高速スタートアップをしないor WSL再起動(powershellでwsl --shutdown)
   - https://qiita.com/snaka/items/a8eee4cfc8f7d733e6ab
 
 ## 参考URL
