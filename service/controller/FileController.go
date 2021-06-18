@@ -1,10 +1,15 @@
-//ファイル処理関係
+/*
+コントローラーパッケージ
+
+関数命名規則　NameController.go -> func NameMethodAction()
+*/
 package controller
 
 import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/murase-msk/gin-project/service"
 )
 
 //アップロードされたファイルの解析
@@ -25,8 +30,15 @@ func FileAnalysisAction(c *gin.Context) {
 		return
 	}
 
+	var labelList []string
+	imageProc := new(service.ImageProcess)
+	//labelList = imageProc.GetLabelFromImage("savedFile/" + data1.Filename)
+	//jsonVal, _ := json.Marshal(labelList)
+
+	imageProc.GetTextFromImage("savedFile/" + data1.Filename)
+
 	defer c.JSON(http.StatusOK, gin.H{
-		"message": "index message",
+		"message": labelList,
 	})
 
 }

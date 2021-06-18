@@ -25,10 +25,11 @@ RUN go get -u github.com/go-delve/delve/cmd/dlv@master
 # Linter
 RUN go get -u honnef.co/go/tools/cmd/staticcheck
 # Language Server?
-RUN go get -u golang.org/x/tools/gopls@latest
+# RUN go get -u golang.org/x/tools/gopls@latest
 # コードフォーマット
 RUN go get -u golang.org/x/tools/cmd/goimports
-
+# godoc ドキュメント自動生成
+RUN go get golang.org/x/tools/cmd/godoc
 
 # airの起動
 CMD air -c .air.toml
